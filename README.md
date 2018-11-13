@@ -47,10 +47,8 @@
 |name|string|null: false, unique: true|
 
 ### Association
-- has_many :users, through: :members
 - has_many :members
-- has_many :messages
-
+- has_many :users, through: :members
 
 <!-- This README would normally document whatever steps are necessary to get the
 application up and running.
