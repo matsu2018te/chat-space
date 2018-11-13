@@ -17,24 +17,23 @@
 
 |Column|Type|Options|
 |------|----|-------|
-|group_id|integer|null: false|
-|name|string|null: false|
-|email|string|null: false, unique: true|
+|name|string|null: false, unique: true, index: true|
+|email|string|null: false, unique: true, |
 
 ### Association
-- has_many :comments
+- has_many :messages
 - has_many :members, through: :members
 
 
 
-## commentsテーブル
+## messagesテーブル
 
 |Column|Type|Options|
 |------|----|-------|
-|user_id|integer|null: false|
+|user_id|integer|null: false, foreign_key: true|
 |group_id|integer|null: false|
 |body|text|null: false|
-|image|string|null: false|
+|image|string||
 
 ### Association
 - belongs_to :group
@@ -50,6 +49,8 @@
 ### Association
 - has_many :users, through: :members
 - has_many :members
+- has_many :messages
+
 
 <!-- This README would normally document whatever steps are necessary to get the
 application up and running.
