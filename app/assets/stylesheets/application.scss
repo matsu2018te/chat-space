@@ -1,4 +1,5 @@
 @import "config/colors";
+@import "mixin/vendor_prefix";
 @import "config/font-size";
 @import "modules/side_bar";
 @import "modules/flash";
@@ -7,3 +8,4 @@
 @import "modules/group";
 @import "./reset";
 @import "./index";
+@import "modules/chat";
