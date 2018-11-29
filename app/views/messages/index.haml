@@ -1,51 +1,21 @@
-!!!
-%html
-  %head
-    %meta{:charset => "utf-8"}/
-    %title ReviewSpace
-    %link{:href => "index.scss", :rel => "stylesheet"}/
-    %link{:href => "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css", :rel=> "stylesheet"}/
-  %body
-    / サイドバー
-    .chat-side
-      .chat-side__user
-        .chat-side__user--content
-          .chat-side__user--content--name
-            ユーザー
-          %a.chat-side__user--content--name__new-group{:href => ""}
-            %i.fa.fa-pencil-square-o
-          %a.chat-side__user--content--name__edit-user{:href => ""}
-            %i.fa.fa-cog
+= render 'shared/side_bar'
 
-      .chat-side__groups
-        .chat-side__groups--list
-          .chat-side__groups--list__group
-            .chat-side__groups--list__group__group-name テックエキスパート
-            .chat-side__groups--list__group__group-message テスト
+.chat-main
+  .chat-main__header
+    .chat-main__header--group.clearfix
+      .chat-main__header--group-name
+        = @group.name
+      %a.chat-main__header--group-edit{:href => "edit"} edit
+    .chat-main__header-members メンバー：matsumoto
 
-    .chat-main
-      .chat-main__header
-        .chat-main__header--group.clearfix
-          .chat-main__header--group-name テックエキスパート
-          %a.chat-main__header--group-edit{:href => ""} edit
-        .chat-main__header-members メンバー：matsumoto
+  .messages
+    = render @messages
 
-      .chat-main__body
-        .chat-main__body--messages-list
-          .chat-main__body--messages-list-message.clearfix
-            .chat-main__body--messages-list-message-name
-              ユーザー
-            .chat-main__body--messages-list-message-time
-              2018/11/16 16:00:00
-            .chat-main__body--messages-list-message-body
-              テスト
-              %img.chat-main__body--messages-list-message-body-image{:src => ""}/
-
-      .chat-main__footer
-        %form.chat-main__footer-form
-          .chat-main__footer-form-body
-            %input.chat-main__footer-form-body-message{:name => "message[body]", :placeholder => "type a message", :type => "text"}
-            %label.chat-main__footer-form-body-chat-file{:for => "message_image"}
-              %input.chat-main__footer-form-body-chat-file-image{:name => "message[image]", :type => "file"}/
-              %i.fa.fa-image
-          %input.submit{:name => "commit", :type => "submit", :value => "Send"}/
+  .form
+    = form_for [@group, @message] do |f|
+      = f.text_field :content, class: 'form__message', placeholder: 'type a message'
+      .form__mask
+        = f.label :image, class: 'form__mask__image' do
+          = fa_icon 'picture-o', class: 'icon'
+          = f.file_field :image, class: 'hidden'
+      = f.submit 'Send', class: 'form__submit'
