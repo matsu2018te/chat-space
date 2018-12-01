@@ -2,7 +2,7 @@ $(function(){
 
   function buildHTML(message){
     var insertImage = (message.image)? `<img class="lower-message__image" src="${message.image}">` : "";
-    var html = `
+    var massage_html = `
         <div class="message">
           <div class="upper-message">
             <div class="upper-message__user-name">
@@ -20,7 +20,7 @@ $(function(){
           </div>
         </div>
         `
-    return html;
+    return massage_html;
   }
 
   $('#new_message').on('submit', function(e){
@@ -35,9 +35,9 @@ $(function(){
       processData: false,
       contentType: false,
     })
-    .done(function(data){
-      var html = buildHTML(data);
-      $('.messages').append(html)
+    .done(function(message_data){
+      var message_html = buildHTML(message_data);
+      $('.messages').append(message_html)
     })
     .fail(function(){
       alert('error');
