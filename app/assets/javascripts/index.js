@@ -1,5 +1,5 @@
 $(function() {
-  var user_search_result = $('#user-search-result');//追加変数
+  var user_search_result = $('#user-search-result');
   var chat_group_users = $('#chat-group-users');
 
 function appendUsers(users) {
