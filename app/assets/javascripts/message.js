@@ -1,7 +1,7 @@
  $(document).on('turbolinks:load', function() {
   function buildHTML(message){
 
-    var $image = message.image ? `<image src="${message.image}" class="lower-message__image" alt="image" width="300" height="300">` : ``
+    var image = message.image ? `<img class="lower-message__image" src="${message.image}">` : '';
     var massage_html = `
     <div class="message" data-message-id = "${message.id}">
     <div class="upper-message">
@@ -15,7 +15,7 @@
     <div class="lower-meesage">
     ${message.content}
     </div>
-    ${$image}
+    ${image}
     </div>
     </div>`;
     return massage_html;
@@ -51,33 +51,33 @@
     });
   })
 
-  $(function () {
-    var interval = setInterval(function(){
-      if (window.location.href.match(/\/groups\/\d+\/messages/)) {
-        var last_message_id = $('.message').last().data('message-id');
+  // $(function () {
+  //   var interval = setInterval(function(){
+  //     if (window.location.href.match(/\/groups\/\d+\/messages/)) {
+  //       var last_message_id = $('.message').last().data('message-id');
 
-        $.ajax({
-          url: location.href,
-          type: 'GET',
-          data: { id: last_message_id },
-          dataType: 'json'
-        })
+  //       $.ajax({
+  //         url: location.href,
+  //         type: 'GET',
+  //         data: { id: last_message_id },
+  //         dataType: 'json'
+  //       })
 
-        .done(function(messages) {
-          if (messages.length !== 0 ){
-            messages.forEach(function(messages) {
-              var insertHTML = buildHTML(messages);
-              $('.messages').append(insertHTML);
-            });
-            $('.messages').animate({scrollTop: $('.messages')[0].scrollHeight},"first");
-          }
-        })
-        .fail(function(messages) {
-          alert('Automatic update failed');
-        });
-      } else {
-        clearInterval(interval);
-      }
-    } , 3000);
-  });
+  //       .done(function(messages) {
+  //         if (messages.length !== 0 ){
+  //           messages.forEach(function(messages) {
+  //             var insertHTML = buildHTML(messages);
+  //             $('.messages').append(insertHTML);
+  //           });
+  //           $('.messages').animate({scrollTop: $('.messages')[0].scrollHeight},"first");
+  //         }
+  //       })
+  //       .fail(function(messages) {
+  //         alert('Automatic update failed');
+  //       });
+  //     } else {
+  //       clearInterval(interval);
+  //     }
+  //   } , 3000);
+  // });
 });
